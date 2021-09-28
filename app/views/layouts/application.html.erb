@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SampleApp</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <%= yield %>
+  <% if session[:user_id] %>
+  <% current_user = User.find_by(id: session[:user_id]) %>
+  <li>
+  現在ログインしているユーザーのID:
+   <%= link_to(@current_user.name, "/users/@current_user.id") %>
+  </li>
+  <li>
+   <%= link_to("投稿一覧", "/posts/index") %>
+  </li>
+  <li>
+   <%= link_to("新規投稿", "/posts/new") %>
+  </li>
+  <li>
+   <%= link_to("ユーザー一覧", "/users/index") %>
+  </li>
+  <li>
+   <%= link_to("ログアウト", "/logout") %>
+  </li>
+  <% else %>
+  <li>
+     <%= link_to("ログイン", "/users/login_form") %>
+  </li>
+  <li>
+      <%= link_to("新規登録", "/signup") %>
+  </li>
+  <% end %>
+  <% if flash[:notice] %>
+   <div class="flash">
+    <%= flash[:notice] %>
+   </div>
+  <% end %>
+  </body>
+</html>

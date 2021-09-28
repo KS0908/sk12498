@@ -1,0 +1,11 @@
+<h1>投稿した文章</h1>
+<p>文字列をクリックすると文章を投稿した日時が表示されます</p>
+
+   <% @posts.each do |post| %>
+    <div class="posts-inex-item">
+         <%= link_to(post.content, "/posts/#{post.id}") %>
+     <div class="post-user-name">
+       <%= link_to(post.user.name, "/users/#{post.user.id}") %>
+     </div>
+    </div>
+      <% end %>
